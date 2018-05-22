@@ -1,0 +1,15 @@
+{
+  "name": "zip-download",
+  "version": "1.0.0",
+  "description": "button to upload multiple text files in a zip",
+  "main": "zip-upload.html",
+  "keywords": [
+    "polymer",
+    "web-components"
+  ],
+  "license": "Apache License 2.0",
+  "dependencies": {
+    "js-zip": "marcus7777/js-zip",
+    "polymer": "#1 - 2"
+   }
+}

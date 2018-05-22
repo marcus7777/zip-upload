@@ -1,0 +1,40 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../js-zip/js-zip.html">
+
+<!--  /FileSaver.js/FileSaver.js
+  `<zip-upload></zip-upload>` button to upload multiple text files 
+  @demo demo.html
+-->
+<dom-module id="zip-upload">
+  <template>
+    <template is="dom-if" if="{{files}}">
+      <div id="openFile"><input type="file" id="inputFile" value="load file" accept="application/zip" onchange="handleFiles(this.files)" /></div>
+    </template>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "zip-upload",
+    properties:{
+      files: {
+        type:Object,
+        notify: true,
+      },
+    },
+    zip: function(){
+      if (this.files) {
+        var zip = new JSZip()
+        var that = this
+        
+        Object.keys(this.files).forEach(function(value) {
+          zip.file(value, that.files[value])
+        })
+        
+        zip.generateAsync({type:"blob"})
+        .then(function(content) {
+          saveAs(content, that.name + ".zip")
+        })
+      }
+    },
+  })
+</script>
