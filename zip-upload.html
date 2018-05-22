@@ -7,7 +7,7 @@
 -->
 <dom-module id="zip-upload">
   <template>
-    <div id="openFile"><input type="file" id="inputFile" value="load file" accept="application/zip" onchange="handleFiles(this.files)" /></div>
+    <div id="openFile"><input type="file" id="inputFile" value="load file" accept="application/zip" on-change="handleFiles" /></div>
   </template>
 </dom-module>
 <script>
@@ -17,22 +17,23 @@
       files: {
         type:Object,
         notify: true,
+        value: {},
       },
     },
-    zip: function(){
-      if (this.files) {
-        var zip = new JSZip()
-        var that = this
-        
-        Object.keys(this.files).forEach(function(value) {
-          zip.file(value, that.files[value])
+    handleFiles: function(e,d){
+      var that = this
+      var zip = new JSZip();
+      zip.loadAsync( e.target.files[0] ).then(function(zipData) {
+        zipData.forEach(function(fileName) {
+          zipData.file(fileName)
+          zip.generateAsync({type : "string"}).then(function(unzipData) {
+            that.files[fileName] = unzipData
+          })
         })
-        
-        zip.generateAsync({type:"blob"})
-        .then(function(content) {
-          saveAs(content, that.name + ".zip")
+        zip.async("string").then(function(unzip) {
+           console.log( unzip )
         })
-      }
+      }, function() {alert("Not a valid zip file")}); 
     },
   })
 </script>
