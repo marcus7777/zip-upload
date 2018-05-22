@@ -1,5 +1,5 @@
 {
-  "name": "zip-download",
+  "name": "zip-upload",
   "version": "1.0.0",
   "description": "button to upload multiple text files in a zip",
   "main": "zip-upload.html",

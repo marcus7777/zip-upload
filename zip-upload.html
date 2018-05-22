@@ -7,9 +7,7 @@
 -->
 <dom-module id="zip-upload">
   <template>
-    <template is="dom-if" if="{{files}}">
-      <div id="openFile"><input type="file" id="inputFile" value="load file" accept="application/zip" onchange="handleFiles(this.files)" /></div>
-    </template>
+    <div id="openFile"><input type="file" id="inputFile" value="load file" accept="application/zip" onchange="handleFiles(this.files)" /></div>
   </template>
 </dom-module>
 <script>
