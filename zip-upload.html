@@ -25,13 +25,9 @@
       var zip = new JSZip();
       zip.loadAsync( e.target.files[0] ).then(function(zipData) {
         zipData.forEach(function(fileName) {
-          zipData.file(fileName)
-          zip.generateAsync({type : "string"}).then(function(unzipData) {
+          zipData.files[fileName].async("string").then(function(unzipData) {
             that.files[fileName] = unzipData
           })
-        })
-        zip.async("string").then(function(unzip) {
-           console.log( unzip )
         })
       }, function() {alert("Not a valid zip file")}); 
     },
