@@ -26,7 +26,7 @@
       zip.loadAsync( e.target.files[0] ).then(function(zipData) {
         zipData.forEach(function(fileName) {
           zipData.files[fileName].async("string").then(function(unzipData) {
-            that.set("files." + fileName, unzipData)
+            that.set(["files.", fileName], unzipData)
           })
         })
       }, function() {alert("Not a valid zip file")}); 
