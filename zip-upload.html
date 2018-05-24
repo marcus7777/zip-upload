@@ -24,11 +24,13 @@
       var that = this
       var zip = new JSZip();
       zip.loadAsync( e.target.files[0] ).then(function(zipData) {
+        var files = {}
         zipData.forEach(function(fileName) {
           zipData.files[fileName].async("string").then(function(unzipData) {
-            that.set(["files", fileName], unzipData)
+            files[fileName] = unzipData
           })
         })
+        that.files = files
       }, function() {alert("Not a valid zip file")}); 
     },
   })
