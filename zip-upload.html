@@ -25,10 +25,15 @@
       var zip = new JSZip();
       zip.loadAsync( e.target.files[0] ).then(function(zipData) {
         var files = {}
+        var filesNum = 0
         zipData.forEach(function(fileName) {
+          filesNum++
           zipData.files[fileName].async("string").then(function(unzipData) {
             files[fileName] = unzipData
-            that.files = Object.assign({}, that.files,files)
+            --filesNum
+            if (filesNum === 0) {
+              that.files = files
+            }
           })
         })
       }, function() {alert("Not a valid zip file")}); 
