@@ -28,9 +28,9 @@
         zipData.forEach(function(fileName) {
           zipData.files[fileName].async("string").then(function(unzipData) {
             files[fileName] = unzipData
+            that.files = Object.assign({}, that.files,files)
           })
         })
-        that.files = files
       }, function() {alert("Not a valid zip file")}); 
     },
   })
